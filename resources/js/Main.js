@@ -101,7 +101,7 @@ function App() {
     const classes = useStyles();
     const theme = useTheme();
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -143,12 +143,11 @@ function App() {
                 [classes.drawerClose]: !open,
                 })}
                 classes={{
-                paper: clsx({
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open,
-                }),
-                }}
-            >
+                    paper: clsx({
+                        [classes.drawerOpen]: open,
+                        [classes.drawerClose]: !open,
+                    }),
+                }}>
                 <div className={classes.toolbar}>
                 <IconButton onClick={handleDrawerClose}>
                     {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
