@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/{path?}', 'index');
 
 Route::group(['prefix' => 'admin/data/'], function() {
     Route::get('/tasks', 'TaskController@getTasks');
+    
+    Route::get('/projects', 'ProjectController@getProjects');
 });
