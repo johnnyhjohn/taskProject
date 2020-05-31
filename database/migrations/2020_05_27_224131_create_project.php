@@ -16,7 +16,7 @@ class CreateProject extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('isDeleted');
+            $table->boolean('isDeleted')->default(false);
             $table->timestamps();
         });
     }

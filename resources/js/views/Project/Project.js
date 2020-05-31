@@ -47,7 +47,6 @@ function Project() {
 
     const classes = useStyles();
 
-    console.log('project component')
     const projectService = new ProjectService();
     let isProjectLoaded = false;
     const [projects, setProjects] = useState([]);

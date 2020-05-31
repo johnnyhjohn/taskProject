@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,setState} from 'react';
 import {
     BrowserRouter as Router,
     Link,
@@ -13,6 +13,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import TextField from '@material-ui/core/TextField';
 
 import * as ROUTES from '../../constants/routes'
+
+import EventEmmiter from '../../services/eventEmiiter'
 
 import ProjectList from './../../components/Project/ProjectList';
 import ProjectService from '../../services/projectService';
@@ -32,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     },
     panelTitle : {
         width: '85%',
-        display: 'inline-block'
+        display: 'inline-block',
+        opacity : .75
     },
     cardHeader : {
         display: 'flex',
@@ -49,12 +52,24 @@ const useStyles = makeStyles((theme) => ({
 function ProjectNew() {
 
     const classes = useStyles();
-
-    console.log('project new component')
     const projectService = new ProjectService();
 
     const [project, setProject] = useState(ProjectModel.PROJECT_SCHEMA);
-    
+    const eventEmmiter = new EventEmmiter();
+
+    const handleValue = (e, field) => {
+        e.preventDefault();
+        setProject({...project, [field] : e.target.value})
+    }
+
+    const createProject = async () => {
+
+        const createHandle = await projectService.createProject(project);
+        console.log(createHandle);
+        const serviceReturn = createHandle[0];
+        eventEmmiter.dispatch('showNotification', {message : serviceReturn.mensagem, status: serviceReturn.codigo })
+    }
+
     return (
         <div className="container">
             <div className="row justify-content-center">
@@ -69,15 +84,13 @@ function ProjectNew() {
                             </div>
                             <div className={classes.cardContent}>
                                 {Object.keys( ProjectModel.PROJECT_LABELS ).map( key => (
-                                    <TextField required id={key} label={ProjectModel.PROJECT_LABELS[key]} defaultValue={project[key]} />
+                                    <TextField value={project[key]} required id={key} label={ProjectModel.PROJECT_LABELS[key]} onChange={(e) => { handleValue(e, key) }} />
                                 ))}
                             </div>
                         </CardContent>
                         <Divider />
                         <CardActions className={classes.cardActions}>
-                            <Button size="medium" color="primary">
-                                CREATE
-                            </Button>
+                            <Button size="medium" color="primary" onClick={createProject}>CREATE</Button>
                         </CardActions>
                     </Paper>
                 </Card>

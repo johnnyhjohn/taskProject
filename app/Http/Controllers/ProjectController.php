@@ -21,4 +21,15 @@ class ProjectController extends Controller
             return JSONUtils::returnDanger('Problema de acesso à base de dados.', $e);
         }
     }
+
+    public function setProjects( Request $request ) 
+    {
+        try{
+            $project = Project::create($request->all());
+            return JSONUtils::returnSuccess('Projeto '. $project->name .' criado com sucesso', $project);
+
+        } catch(Exception $e){
+            return JSONUtils::returnDanger('Problema ao criar projeto.', $e);
+        }
+    }
 }

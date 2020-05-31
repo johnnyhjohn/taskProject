@@ -18,4 +18,18 @@ export default class projectService extends React.Component {
         return fetch( ENDPOINT, requestOptions)
             .then((response) => response.json());
     }
+
+    createProject( project ) {
+        
+        const requestOptions = {
+            body : JSON.stringify(project),
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        };
+        
+        return fetch( ENDPOINT, requestOptions)
+            .then((response) => response.json());
+    }
 }
