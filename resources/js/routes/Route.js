@@ -5,6 +5,7 @@ import * as ROUTES from './../constants/routes'
 // import Login from './views/Login/Login';
 import Task from './../views/Task/Task';
 import Project from './../views/Project/Project';
+import ProjectNew from '../views/Project/ProjectNew';
 // import NotFound from './views/NotFound/NotFound'
 // User is LoggedIn
 // import PrivateRoute from './PrivateRoute'
@@ -14,7 +15,8 @@ const Main = props => (
     <Switch>
         {/*User might LogIn*/}
         <Route exact path={ROUTES.TASK} component={Task}/>
-        <Route path={ROUTES.PROJECT} component={Project}/>
+        <Route exact path={ROUTES.PROJECT} component={Project}/>
+        <Route exact path={ROUTES.PROJECT_CREATE} component={ProjectNew}/>
         {/*User will LogIn*/}
         {/* <Route path='/login' component={Login}/>
         <Route path='/register' component={Register}/> */}

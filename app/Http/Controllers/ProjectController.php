@@ -10,7 +10,7 @@ use App\JSONUtils;
 class ProjectController extends Controller
 {
   
-    public function getProjects()
+    public function getProjects(Request $request)
     {
         try{
             $data['projects'] = Project::where('isDeleted','=', false)->get();
