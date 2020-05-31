@@ -13,6 +13,9 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import { Typography, Button } from '@material-ui/core';
+
+import * as ROUTES from '../../constants/routes'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
     },
     paperContainer : {
         width: '100%' 
+    },
+    panelTitle : {
+        width: '85%',
+        display: 'inline-block'
     }
   }));
 
@@ -55,7 +62,12 @@ function Project() {
                 <Card className={classes.root}>
                     <Paper elevation={0} className={classes.paperContainer}>
                         <CardContent style={{padding:0}}>
-                            <div className="card-header">Project Component</div>
+                            <div className="card-header">
+                                <Typography variant="h4" className={classes.panelTitle}>Project Component</Typography>
+                                <Link to={ROUTES.PROJECT_CREATE}>
+                                    <Button>NEW PROJECT</Button>
+                                </Link>
+                            </div>
                             <ProjectList projectList={projects}></ProjectList>
                         </CardContent>
                     </Paper>
