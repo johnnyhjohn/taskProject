@@ -13,7 +13,7 @@ export default class taskService extends React.Component {
             method: 'GET'
         };
         
-        return fetch(`${window.location.origin}/admin/data/tasks`, requestOptions)
+        return fetch(`${window.location.origin}/api/tasks`, requestOptions)
             .then((response) => response.json());
     }
 }

@@ -13,6 +13,17 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import { Typography, Button } from '@material-ui/core';
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+import * as ROUTES from '../../constants/routes'
+import * as ProjectModel from '../../models/Project';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     },
     paperContainer : {
         width: '100%' 
+    },
+    panelTitle : {
+        width: '85%',
+        display: 'inline-block'
     }
   }));
 
@@ -32,9 +47,8 @@ function Project() {
 
     const classes = useStyles();
 
-    console.log('project component')
     const projectService = new ProjectService();
-    let isTaskLoaded = false;
+    let isProjectLoaded = false;
     const [projects, setProjects] = useState([]);
     
     useEffect(() => {
@@ -43,11 +57,11 @@ function Project() {
                 setProjects((response[0].objeto.projects)) 
             }
 
-            if(isTaskLoaded === false) {
-                isTaskLoaded = true;
+            if(isProjectLoaded === false) {
+                isProjectLoaded = true;
             }
         })
-    }, [isTaskLoaded])
+    }, [isProjectLoaded])
 
     return (
         <div className="container">
@@ -55,8 +69,27 @@ function Project() {
                 <Card className={classes.root}>
                     <Paper elevation={0} className={classes.paperContainer}>
                         <CardContent style={{padding:0}}>
-                            <div className="card-header">Project Component</div>
-                            <ProjectList projectList={projects}></ProjectList>
+                            <div className="card-header">
+                                <Typography variant="h4" className={classes.panelTitle}>Project Component</Typography>
+                                <Link to={ROUTES.PROJECT_CREATE}>
+                                    <Button>NEW PROJECT</Button>
+                                </Link>
+                            </div>
+                            <TableContainer>
+                                <Table className={classes.table} aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            {Object.keys( ProjectModel.PROJECT_LABELS ).map( key => 
+                                                <TableCell key={`tablehead-field-${key}`}>{ProjectModel.PROJECT_LABELS[key]}</TableCell>
+                                            )}
+                                            <TableCell >Actions</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        <ProjectList projectList={projects}></ProjectList>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
                         </CardContent>
                     </Paper>
                 </Card>

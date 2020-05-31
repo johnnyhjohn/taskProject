@@ -13,6 +13,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Menu from './components/Menu/Menu'
+import Notification from './components/Notification/Notification'
 
 const drawerWidth = 240;
 
@@ -90,6 +91,7 @@ function App() {
     
     return (
         <div className={classes.root}>
+            <Notification />
             <CssBaseline />
             <Menu />
             <main className={classes.content}>

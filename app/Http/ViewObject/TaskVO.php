@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\ViewObject;
+
+use App\Project;
 use App\Task;
 
 class TaskVO
@@ -9,6 +11,8 @@ class TaskVO
   public $name;
   public $duration;
   public $status;
+  public $id_project;
+  public $project;
 
   public function __construct(Task $obj = null){
     if($obj != null){
@@ -21,6 +25,8 @@ class TaskVO
     $this->name = $obj->name;
     $this->duration = $obj->duration;
     $this->status = $obj->status;
+    $this->project = Project::find($obj->id_project);
+    $this->id_project = $obj->id_project;
   }
 
   public function convertToEntity(){

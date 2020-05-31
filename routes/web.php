@@ -13,10 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/{path?}', 'index');
+Route::get('/{any}', 'SinglePageController@index')->where('any', '.*');
 
-Route::group(['prefix' => 'admin/data/'], function() {
-    Route::get('/tasks', 'TaskController@getTasks');
-    
-    Route::get('/projects', 'ProjectController@getProjects');
-});

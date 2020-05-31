@@ -2,6 +2,8 @@ import React from 'react';
 
 import axios from 'axios';
 
+const ENDPOINT = `${window.location.origin}/api/projects`;
+
 export default class projectService extends React.Component {
 
     constructor (props) {
@@ -13,7 +15,21 @@ export default class projectService extends React.Component {
             method: 'GET'
         };
         
-        return fetch(`${window.location.origin}/admin/data/projects`, requestOptions)
+        return fetch( ENDPOINT, requestOptions)
+            .then((response) => response.json());
+    }
+
+    createProject( project ) {
+        
+        const requestOptions = {
+            body : JSON.stringify(project),
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            method: 'POST'
+        };
+        
+        return fetch( ENDPOINT, requestOptions)
             .then((response) => response.json());
     }
 }

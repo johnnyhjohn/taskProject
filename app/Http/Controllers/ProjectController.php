@@ -10,7 +10,7 @@ use App\JSONUtils;
 class ProjectController extends Controller
 {
   
-    public function getProjects()
+    public function getProjects(Request $request)
     {
         try{
             $data['projects'] = Project::where('isDeleted','=', false)->get();
@@ -19,6 +19,17 @@ class ProjectController extends Controller
 
         } catch(Exception $e){
             return JSONUtils::returnDanger('Problema de acesso à base de dados.', $e);
+        }
+    }
+
+    public function setProjects( Request $request ) 
+    {
+        try{
+            $project = Project::create($request->all());
+            return JSONUtils::returnSuccess('Projeto '. $project->name .' criado com sucesso', $project);
+
+        } catch(Exception $e){
+            return JSONUtils::returnDanger('Problema ao criar projeto.', $e);
         }
     }
 }
