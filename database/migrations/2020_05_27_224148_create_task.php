@@ -20,7 +20,7 @@ class CreateTask extends Migration
             $table->boolean('status');
             $table->integer('id_project')->unsigned();
             $table->foreign('id_project')->references('id')->on('projects');
-            $table->boolean('isDeleted');
+            $table->boolean('isDeleted')->default(false);
             $table->timestamps();
         });
     }

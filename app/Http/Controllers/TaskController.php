@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\ViewObject\TaskVO;
 use Illuminate\Http\Request;
 
 use App\Task;
@@ -12,7 +13,13 @@ class TaskController extends Controller {
     public function getTasks()
     {
         try{
-            $data['tasks'] = Task::where('isDeleted','=', false)->get();
+            $tasks =  Task::where('isDeleted','=', false)->get();
+            $tasksVO = [];
+            foreach($tasks as $key => $task ){
+                $taskVO = new TaskVO($task);
+                array_push($tasksVO, $taskVO);
+            }
+            $data['tasks'] = $tasksVO;
 
             return JSONUtils::returnSuccess('Request executado com sucesso', $data);
 
