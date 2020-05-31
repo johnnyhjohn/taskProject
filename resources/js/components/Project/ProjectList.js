@@ -4,6 +4,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 import * as ProjectModel from '../../models/Project';
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 function ProjectList( props ) {
     
@@ -14,6 +16,10 @@ function ProjectList( props ) {
                 {value[key]}
               </TableCell>
         ))}
+            <TableCell component="th" scope="row">
+                <CreateIcon></CreateIcon>
+                <DeleteIcon></DeleteIcon>
+            </TableCell>
         </TableRow>
     ))
 

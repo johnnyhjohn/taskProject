@@ -8,11 +8,9 @@ import {
 } from "react-router-dom";
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import { Typography, Button } from '@material-ui/core';
+import { CardContent, Card, Paper, Typography, Button, CardActions, Divider } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import TextField from '@material-ui/core/TextField';
 
 import * as ROUTES from '../../constants/routes'
 
@@ -35,6 +33,16 @@ const useStyles = makeStyles((theme) => ({
     panelTitle : {
         width: '85%',
         display: 'inline-block'
+    },
+    cardHeader : {
+        display: 'flex',
+        alignItems: 'center'
+    },
+    cardContent : {
+        padding: '20px'
+    },
+    cardActions : {
+        background : '#f8f8f8'
     }
   }));
 
@@ -53,14 +61,24 @@ function ProjectNew() {
                 <Card className={classes.root}>
                     <Paper elevation={0} className={classes.paperContainer}>
                         <CardContent style={{padding:0}}>
-                            <div className="card-header">
+                            <div className={`card-header ${classes.cardHeader}`}>
                                 <Link to={ROUTES.PROJECT}>
-                                    <ArrowBackIcon />
+                                    <Button><ArrowBackIcon /></Button>
                                 </Link>
                                 <Typography variant="h4" className={classes.panelTitle}>New Project</Typography>
                             </div>
-                            
+                            <div className={classes.cardContent}>
+                                {Object.keys( ProjectModel.PROJECT_LABELS ).map( key => (
+                                    <TextField required id={key} label={ProjectModel.PROJECT_LABELS[key]} defaultValue={project[key]} />
+                                ))}
+                            </div>
                         </CardContent>
+                        <Divider />
+                        <CardActions className={classes.cardActions}>
+                            <Button size="medium" color="primary">
+                                CREATE
+                            </Button>
+                        </CardActions>
                     </Paper>
                 </Card>
             </div>

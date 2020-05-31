@@ -83,6 +83,7 @@ function Project() {
                                             {Object.keys( ProjectModel.PROJECT_LABELS ).map( key => 
                                                 <TableCell key={`tablehead-field-${key}`}>{ProjectModel.PROJECT_LABELS[key]}</TableCell>
                                             )}
+                                            <TableCell >Actions</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
